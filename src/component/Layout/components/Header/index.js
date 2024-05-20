@@ -12,22 +12,21 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
-                    <img src={images.logo} alt="logo tik tok" />
-                </div>
+                <img src={images.logo} alt="logo tik tok" />
                 <div className={cx('search')}>
                     <input placeholder="Search ..." spellCheck={false} />
-                    <button className={cx('search--clear')}>
+                    <button className={cx('search__clear')}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                     <FontAwesomeIcon
-                        className={cx('search--spinner')}
+                        className={cx('search__spinner')}
                         icon={faSpinner}
                     />
-                    <button className={cx('search--btn')}>
+                    <button className={cx('search__btn')}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>
+                <div className={cx('action')}></div>
             </div>
         </header>
     );
