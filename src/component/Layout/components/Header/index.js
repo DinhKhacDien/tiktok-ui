@@ -12,6 +12,7 @@ import { Wrapper as WrapperPropper } from '~/component/Propper';
 import styles from './Header.module.scss';
 import images from '~/assets/img';
 import AccountItem from '~/component/AccountItem';
+import Button from '~/component/Button';
 const cx = classNames.bind(styles);
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
@@ -61,7 +62,10 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
-                <div className={cx('action')}></div>
+                <div className={cx('action')}>
+                    <Button text>Upload</Button>
+                    <Button primary>Log in</Button>
+                </div>
             </div>
         </header>
     );
