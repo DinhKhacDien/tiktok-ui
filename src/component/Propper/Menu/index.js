@@ -33,8 +33,12 @@ function Menu({ items = [], children, onChange = defaultFn }) {
     return (
         <Tippy
             interactive
+            offset={[12, 10]}
             delay={[0, 700]}
             placement="bottom-end"
+            onHide={() => {
+                setDisplay((prev) => prev.slice(0, 1));
+            }}
             render={(Attr) => (
                 <div className={cx('content')} tabIndex="-1" {...Attr}>
                     <WrapperPropper className={cx('custom-menu')}>
