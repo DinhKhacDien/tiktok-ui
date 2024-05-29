@@ -3,13 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloud,
-    faMessage,
     faUser,
     faBookmark,
     faArrowRightFromBracket,
@@ -24,9 +21,16 @@ import 'tippy.js/dist/tippy.css';
 import { Wrapper as WrapperPropper } from '~/component/Propper';
 import styles from './Header.module.scss';
 import images from '~/assets/img';
+import Image from '~/component/Image';
 import AccountItem from '~/component/AccountItem';
 import Button from '~/component/Button';
 import Menu from '~/component/Propper/Menu';
+import {
+    InboxIcon,
+    MesseageIcon,
+    SearchIcon,
+    UploadIcon,
+} from '~/component/Icon';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -132,9 +136,15 @@ function Header() {
                             icon={faSpinner}
                         />
 
-                        <button className={cx('search__btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
+                        <Tippy
+                            delay={[0, 200]}
+                            placement="bottom"
+                            content="Search"
+                        >
+                            <button className={cx('search__btn')}>
+                                <SearchIcon className={cx('search-icon')} />
+                            </button>
+                        </Tippy>
                     </div>
                 </HeadlessTippy>
                 <div className={cx('action')}>
@@ -146,12 +156,27 @@ function Header() {
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloud} />
+                                    <UploadIcon className={cx('upload')} />
                                 </button>
                             </Tippy>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faMessage} />
-                            </button>
+                            <Tippy
+                                delay={[0, 200]}
+                                content="Inbox"
+                                placement="bottom"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon className={cx('inbox')} />
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                delay={[0, 200]}
+                                content="Messeage"
+                                placement="bottom"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <MesseageIcon className={cx('messeage')} />
+                                </button>
+                            </Tippy>
                         </>
                     ) : (
                         <>
@@ -164,8 +189,8 @@ function Header() {
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
-                            <img
-                                src="https://avatars.githubusercontent.com/u/170196001?v=4"
+                            <Image
+                                src=""
                                 alt="Dinh Khac Dien"
                                 className={cx('user-avatar')}
                             />
