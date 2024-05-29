@@ -21,88 +21,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.search,
-.search__result {
-    width: 361px;
-}
-.search {
-    position: relative;
-    background-color: var(--background-search);
-    height: var(--height-search);
-    border-radius: var(--border-radius-search);
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    padding-left: var(--padding-left-search);
-    input {
-        flex: 1;
-        font-size: 1.6rem;
-        color: var(--color-input);
-        caret-color: var(--primary);
-        background-color: transparent;
-        height: 100%;
-    }
 
-    input:not(:placeholder-shown) ~ .search__btn {
-        color: var(--color-input);
-    }
-    &::after {
-        content: '';
-        position: absolute;
-        top: var(--top-spacer-search);
-        right: var(--width-button-search);
-        height: calc(var(--height-search) - var(--top-spacer-search) * 2);
-        width: 1px;
-        background: rgba(22, 24, 35, 0.12);
-    }
-
-    &:focus-within {
-        border-color: rgba(22, 24, 35, 0.2);
-    }
-}
-.search__title {
-    color: rgba(22, 24, 35, 0.5);
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 5px 12px;
-}
-.search__clear,
-.search__spinner {
-    color: rgba(22, 24, 35, 0.34);
-    font-size: 1.6rem;
-    position: absolute;
-    right: calc(var(--width-button-search) + var(--padding-left-search));
-    top: 50%;
-    transform: translateY(-50%);
-}
-.search__btn {
-    width: var(--width-button-search);
-    height: calc(var(--height-search) - 5px);
-    font-size: 1.8rem;
-    border-top-right-radius: var(--border-radius-search);
-    border-bottom-right-radius: var(--border-radius-search);
-    color: rgba(22, 24, 35, 0.75);
-    &:hover {
-        background: rgba(22, 24, 35, 0.03);
-        cursor: pointer;
-    }
-    &:active {
-        background: var(--background-search);
-    }
-}
-.action {
-    display: flex;
-    align-items: center;
-}
-.action-btn {
-    background-color: transparent;
-    font-size: 2.2rem;
-    color: #161823;
-    padding: 4px 12px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
 .user-avatar {
     width: 32px;
     height: 32px;
@@ -117,4 +36,24 @@
     padding: 4px 8px;
     background-color: transparent;
     cursor: pointer;
+}
+
+//messeage-notification
+.action-btn {
+    position: relative;
+}
+.messeage-notification {
+    position: absolute;
+    top: -2px;
+    left: 30px;
+    min-width: 20px;
+    height: 20px;
+    font-size: 1.4rem;
+    font-family: 'TikTokFont', sans-serif;
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
