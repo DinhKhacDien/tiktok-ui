@@ -14,11 +14,10 @@ function Search() {
     //get value input
     const [input, setInput] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const inputRef = useRef();
-    const handlChange = (value) => {
-        setInput(value);
-    };
     const handlClear = () => {
         setInput('');
         inputRef.current.focus();
@@ -26,12 +25,26 @@ function Search() {
     const handlHideResult = () => {
         setShowResult(false);
     };
-
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1]);
-        }, 0);
-    }, []);
+        if (!input.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+        fetch(
+            `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
+                input,
+            )}&type=less`,
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                setSearchResult(data.data);
+                setLoading(false);
+            })
+            .catch((data) => {
+                setLoading(false);
+            });
+    }, [input]);
     return (
         <HeadlessTippy
             interactive={true}
@@ -41,10 +54,11 @@ function Search() {
                     {' '}
                     <WrapperPropper>
                         <h4 className={cx('search__title')}>Accounts</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((result) => {
+                            return (
+                                <AccountItem key={result.id} data={result} />
+                            );
+                        })}
                     </WrapperPropper>
                 </div>
             )}
@@ -56,12 +70,12 @@ function Search() {
                     ref={inputRef}
                     value={input}
                     onChange={(e) => {
-                        handlChange(e.target.value);
+                        setInput(e.target.value.trimStart());
                     }}
                     placeholder="Search ..."
                     spellCheck={false}
                 />
-                {!!input && (
+                {!!input && !loading && (
                     <button
                         className={cx('search__clear')}
                         onClick={handlClear}
@@ -70,10 +84,12 @@ function Search() {
                     </button>
                 )}
 
-                {/* <FontAwesomeIcon
-                    className={cx('search__spinner')}
-                    icon={faSpinner}
-                /> */}
+                {loading && (
+                    <FontAwesomeIcon
+                        className={cx('search__spinner')}
+                        icon={faSpinner}
+                    />
+                )}
 
                 <Tippy delay={[0, 200]} placement="bottom" content="Search">
                     <button className={cx('search__btn')}>

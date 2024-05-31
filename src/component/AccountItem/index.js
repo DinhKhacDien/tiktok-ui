@@ -1,28 +1,31 @@
 import classNames from 'classnames/bind';
-import styles from './AccountItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import Image from '~/component/Image';
+import styles from './AccountItem.module.scss';
 const cx = classNames.bind(styles);
-function AccountItem() {
+function AccountItem({ data }) {
     return (
-        <div className={cx('wrapper')}>
+        <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
             <Image
                 className={cx('avatar')}
-                src="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
-                alt="namme"
+                src={data.avatar}
+                alt={data.nickname}
             />
             <div className={cx('infor')}>
                 <h4 className={cx('name')}>
-                    <span>Dinh Khac Dien</span>
-                    <FontAwesomeIcon
-                        className={cx('check')}
-                        icon={faCircleCheck}
-                    ></FontAwesomeIcon>
+                    <span>{data.full_name}</span>
+                    {data.tick && (
+                        <FontAwesomeIcon
+                            className={cx('check')}
+                            icon={faCircleCheck}
+                        ></FontAwesomeIcon>
+                    )}
                 </h4>
-                <p className={cx('username')}>Dienkk</p>
+                <p className={cx('username')}>{data.nickname}</p>
             </div>
-        </div>
+        </Link>
     );
 }
 

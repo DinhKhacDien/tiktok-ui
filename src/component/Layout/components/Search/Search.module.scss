@@ -52,6 +52,18 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.search__spinner {
+    animation: spinner 0.6s linear infinite;
+}
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
 .search__btn {
     width: var(--width-button-search);
     height: calc(var(--height-search) - 5px);

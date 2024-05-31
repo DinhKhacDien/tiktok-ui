@@ -39,8 +39,16 @@
 }
 
 //messeage-notification
+.action {
+    display: flex;
+    align-items: center;
+}
 .action-btn {
     position: relative;
+    background-color: transparent;
+    font-size: 2.2rem;
+    color: #161823;
+    padding: 4px 12px;
 }
 .messeage-notification {
     position: absolute;
