@@ -8,7 +8,7 @@ import { SearchIcon } from '~/component/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-
+import useDebounce from '~/component/hooks/useDebounce';
 const cx = classNames.bind(styles);
 function Search() {
     //get value input
@@ -16,6 +16,7 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
+    const inputDebounce = useDebounce(input, 500);
 
     const inputRef = useRef();
     const handlClear = () => {
@@ -26,14 +27,15 @@ function Search() {
         setShowResult(false);
     };
     useEffect(() => {
-        if (!input.trim()) {
+        if (!inputDebounce.trim()) {
             setSearchResult([]);
             return;
         }
         setLoading(true);
+
         fetch(
             `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-                input,
+                inputDebounce,
             )}&type=less`,
         )
             .then((response) => response.json())
@@ -44,7 +46,7 @@ function Search() {
             .catch((data) => {
                 setLoading(false);
             });
-    }, [input]);
+    }, [inputDebounce]);
     return (
         <HeadlessTippy
             interactive={true}
